@@ -17,7 +17,7 @@ namespace OOP2Tutorial_4
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1(new Catalogue()));
+            Application.Run(new Form1(new PersistentCatalogue("products.json")));
         }
     }
 }

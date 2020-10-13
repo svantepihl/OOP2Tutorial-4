@@ -14,16 +14,21 @@ namespace OOP2Tutorial_4
             this.catalogue = catalogue;
             InitializeComponent();
             catalogue.CatalogueChanged += CatalogueOnCatalogueChanged;
-            
+            UpdateProductList();
         }
 
-        private void CatalogueOnCatalogueChanged(object sender, PersistentCatalogue.ChangeHandlerArgs args)
+        private void UpdateProductList()
         {
             CatalogueListBox.Items.Clear();
             foreach (Product p in catalogue.AllProducts())
             {
                 CatalogueListBox.Items.Add(p);
             }
+        }
+
+        private void CatalogueOnCatalogueChanged(object sender, PersistentCatalogue.ChangeHandlerArgs args)
+        {
+            UpdateProductList();
         }
 
         private void AddButton_Click(object sender, EventArgs e)
