@@ -21,5 +21,14 @@
         {
             return _name + " (" + _price + ")";
         }
+
+        public bool ValidatePrice()
+        {
+            if (Price < 0 || Price > 9999)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

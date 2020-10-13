@@ -7,16 +7,17 @@ namespace OOP2Tutorial_4
 {
     public partial class Form1 : Form
     {
-        private Catalogue catalogue = new Catalogue();
+        private PersistentCatalogue catalogue;
         
-        public Form1()
+        public Form1(PersistentCatalogue catalogue)
         {
+            this.catalogue = catalogue;
             InitializeComponent();
             catalogue.CatalogueChanged += CatalogueOnCatalogueChanged;
             
         }
 
-        private void CatalogueOnCatalogueChanged(object sender, Catalogue.ChangeHandlerArgs args)
+        private void CatalogueOnCatalogueChanged(object sender, PersistentCatalogue.ChangeHandlerArgs args)
         {
             CatalogueListBox.Items.Clear();
             foreach (Product p in catalogue.AllProducts())
@@ -59,5 +60,27 @@ namespace OOP2Tutorial_4
                 catalogue.UpdateProductPrice(tmp.Name, double.Parse(PriceTextBox.Text));
             }
         }
+
+        private void CheckPriceButton_Click(object sender, EventArgs e)
+        {
+            Product tmp = CatalogueListBox.SelectedItem as Product;
+            if(tmp != null)
+            {
+                if (!tmp.ValidatePrice())
+                {
+                    MessageBox.Show("Price of the product " + tmp.Name + " is not valid.");
+                }
+                else
+                {
+                    MessageBox.Show("Price of the product " + tmp.Name + " is valid.");
+                }
+            }
+        }
+
+        private void TotalsButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Total price of the catalogue is " + catalogue.CalculateSum());
+        }
+        
     }
 }

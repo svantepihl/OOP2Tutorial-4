@@ -40,6 +40,8 @@ namespace OOP2Tutorial_4
             this.RemoveButton = new System.Windows.Forms.Button();
             this.RenameButton = new System.Windows.Forms.Button();
             this.RepriceButton = new System.Windows.Forms.Button();
+            this.CheckPriceButton = new System.Windows.Forms.Button();
+            this.TotalsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CatalogueListBox
@@ -122,11 +124,33 @@ namespace OOP2Tutorial_4
             this.RepriceButton.UseVisualStyleBackColor = true;
             this.RepriceButton.Click += new System.EventHandler(this.RepriceButton_Click);
             // 
+            // CheckPriceButton
+            // 
+            this.CheckPriceButton.Location = new System.Drawing.Point(165, 310);
+            this.CheckPriceButton.Name = "CheckPriceButton";
+            this.CheckPriceButton.Size = new System.Drawing.Size(89, 23);
+            this.CheckPriceButton.TabIndex = 9;
+            this.CheckPriceButton.Text = "Validate Price";
+            this.CheckPriceButton.UseVisualStyleBackColor = true;
+            this.CheckPriceButton.Click += new System.EventHandler(this.CheckPriceButton_Click);
+            // 
+            // TotalsButton
+            // 
+            this.TotalsButton.Location = new System.Drawing.Point(66, 310);
+            this.TotalsButton.Name = "TotalsButton";
+            this.TotalsButton.Size = new System.Drawing.Size(89, 23);
+            this.TotalsButton.TabIndex = 10;
+            this.TotalsButton.Text = "Totals";
+            this.TotalsButton.UseVisualStyleBackColor = true;
+            this.TotalsButton.Click += new System.EventHandler(this.TotalsButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(342, 399);
+            this.Controls.Add(this.TotalsButton);
+            this.Controls.Add(this.CheckPriceButton);
             this.Controls.Add(this.RepriceButton);
             this.Controls.Add(this.RenameButton);
             this.Controls.Add(this.RemoveButton);
@@ -141,6 +165,10 @@ namespace OOP2Tutorial_4
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button TotalsButton;
+
+        private System.Windows.Forms.Button CheckPriceButton;
 
         private System.Windows.Forms.Button RenameButton;
         private System.Windows.Forms.Button RepriceButton;

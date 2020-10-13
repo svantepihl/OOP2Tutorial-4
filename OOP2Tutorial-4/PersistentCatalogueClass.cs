@@ -1,11 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace OOP2Tutorial_4
 {
-    public class Catalogue
+    public class PersistentCatalogue
     {
+        private string filename;
+        
         private List<Product> _products = new List<Product>();
+
+        public PersistentCatalogue(string filename)
+        {
+            this.filename = filename;
+        }
 
         public event ChangeHandler CatalogueChanged;
         
@@ -13,6 +22,25 @@ namespace OOP2Tutorial_4
         
         public class ChangeHandlerArgs
         {
+        }
+
+        private void ReadProductsFromFile()
+        {
+            if (File.Exists(filename))
+            {
+                string fileContents = File.ReadAllText(filename);
+                _products = JsonSerializer.Deserialize<List<Product>>(fileContents);
+            }
+            else
+            {
+                _products = new List<Product>();
+            }
+        }
+
+        private void WriteProductsToFile()
+        {
+            string contents = JsonSerializer.Serialize(_products);
+            File.WriteAllText(filename,contents);
         }
 
         public IEnumerable<Product> AllProducts()
@@ -55,31 +83,6 @@ namespace OOP2Tutorial_4
             }
 
             return false;
-        }
-
-        public bool UpdateProductPrice(string name, double newprice)
-        {
-            foreach (Product product in _products)
-            {
-                if (product.Name.Equals(name))
-                {
-                    product.Price = newprice;
-                    CatalogueChanged?.Invoke(this, new ChangeHandlerArgs());
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public double CalculateSum()
-        {
-            double sum = 0;
-            foreach (Product p in _products)
-            {
-                sum += p.Price;
-            }
-            return sum;
         }
     }
 }
