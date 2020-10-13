@@ -7,9 +7,9 @@ namespace OOP2Tutorial_4
 {
     public partial class Form1 : Form
     {
-        private PersistentCatalogue catalogue;
+        private readonly ICatalogue catalogue;
         
-        public Form1(PersistentCatalogue catalogue)
+        public Form1(ICatalogue catalogue)
         {
             this.catalogue = catalogue;
             InitializeComponent();
@@ -26,7 +26,7 @@ namespace OOP2Tutorial_4
             }
         }
 
-        private void CatalogueOnCatalogueChanged(object sender, PersistentCatalogue.ChangeHandlerArgs args)
+        private void CatalogueOnCatalogueChanged(object sender, ChangeHandlerArgs args)
         {
             UpdateProductList();
         }
@@ -41,8 +41,7 @@ namespace OOP2Tutorial_4
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            Product tmp = CatalogueListBox.SelectedItem as Product;
-            if (tmp != null)
+            if (CatalogueListBox.SelectedItem is Product tmp)
             {
                 {catalogue.RemoveProduct(tmp.Name);}
             }
@@ -50,8 +49,7 @@ namespace OOP2Tutorial_4
 
         private void RenameButton_Click(object sender, EventArgs e)
         {
-            Product tmp = CatalogueListBox.SelectedItem as Product;
-            if (tmp != null)
+            if (CatalogueListBox.SelectedItem is Product tmp)
             {
                 catalogue.RenameProduct(tmp.Name, NameTextBox.Text);
             }
@@ -59,8 +57,7 @@ namespace OOP2Tutorial_4
 
         private void RepriceButton_Click(object sender, EventArgs e)
         {
-            Product tmp = CatalogueListBox.SelectedItem as Product;
-            if (tmp != null)
+            if (CatalogueListBox.SelectedItem is Product tmp)
             {
                 catalogue.UpdateProductPrice(tmp.Name, double.Parse(PriceTextBox.Text));
             }
@@ -68,8 +65,7 @@ namespace OOP2Tutorial_4
 
         private void CheckPriceButton_Click(object sender, EventArgs e)
         {
-            Product tmp = CatalogueListBox.SelectedItem as Product;
-            if(tmp != null)
+            if(CatalogueListBox.SelectedItem is Product tmp)
             {
                 if (!tmp.ValidatePrice())
                 {

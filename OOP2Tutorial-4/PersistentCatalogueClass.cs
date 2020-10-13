@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace OOP2Tutorial_4
 {
-    public class PersistentCatalogue
+    public class PersistentCatalogue : ICatalogue
     {
         private string filename;
 
@@ -18,12 +18,6 @@ namespace OOP2Tutorial_4
         }
 
         public event ChangeHandler CatalogueChanged;
-        
-        public delegate void ChangeHandler(object sender, ChangeHandlerArgs args);
-        
-        public class ChangeHandlerArgs
-        {
-        }
 
         private void ReadProductsFromFile()
         {

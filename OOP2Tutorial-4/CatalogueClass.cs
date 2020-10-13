@@ -3,17 +3,11 @@ using System.Collections.Generic;
 
 namespace OOP2Tutorial_4
 {
-    public class Catalogue
+    public class Catalogue : ICatalogue
     {
         private List<Product> _products = new List<Product>();
 
         public event ChangeHandler CatalogueChanged;
-        
-        public delegate void ChangeHandler(object sender, ChangeHandlerArgs args);
-        
-        public class ChangeHandlerArgs
-        {
-        }
 
         public IEnumerable<Product> AllProducts()
         {
